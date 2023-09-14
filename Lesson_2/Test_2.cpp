@@ -1,34 +1,46 @@
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
-struct node
-{
-    int data;
-    node *next;
+class Node{
+	public:
+		int data;
+		Node *next;
+		Node(int data){
+			this->data = data;
+			this->next = NULL;
+		}
 };
 
-void print(node *head)
+class linkList{
+	public:
+		void print(Node *head);
+	    void insert(Node *&head, int post, int val);
+	    void erase(Node *&head, int post);
+
+};
+
+void linkList::print(Node *head)
 {
+	cout << "Output: ";
     while(head != NULL){
         cout << head->data << " ";
         head = head->next;
     }
+    cout << endl;
 }
 
-void insert(node *&head, int post, int val)
-{ 
-    int n = sizeof(head);
-    node *temp = head;
-    node *newNode = new node{val, NULL};
-    if(post < 0 || post > n) return;
-    // insert head
-    if(post == 0){
-        newNode->next = head;
-        head = newNode;
-    }
-    // insert tail
+void linkList::insert(Node *&head, int post, int val)
+{
+	int n = sizeof(head);
+	Node *temp = head;
+	Node *newNode = new Node(val);
+	if(post < 0 || post > n) return;
+	if(post == 0){
+		newNode->next = head;
+		head = newNode;
+	}
+	 // insert tail
     else if(post == n){
-     node *newNode = new node{val, NULL};
      if(head == NULL)
      {
         head = newNode; return;
@@ -47,14 +59,15 @@ void insert(node *&head, int post, int val)
      newNode->next = temp->next;
      temp->next = newNode;
     }
-
+    
 }
 
-void erase(node *&head, int post)
+
+void linkList::erase(Node *&head, int post)
 {
     int n = sizeof(head);
-    node *temp = head;
-    node *postNode = NULL;
+    Node *temp = head;
+    Node *postNode = NULL;
     if(post < 0 || post > n) return;
     // erase head
     if(post == 0){
@@ -82,32 +95,43 @@ void erase(node *&head, int post)
       delete postNode;
     }
 }
-int main()
-{ 
-    int T, post, val;
-    node *head = NULL;
-    cout <<"Input: " ;
-    cin >> T;
-    while (T--)
+void menu(int T)
+{
+	linkList linklist;
+    int post, val;
+    Node *head = NULL;
+	while (T--)
     {
         int chon;
-        cout << "Nhap lua chon 1 de xoa 0 de chen: ";
+        cout << "Nhap lua chon 0 de chen hoac 1 de xoa: ";
         cin >> chon ;
         if(chon == 0){
-         cout << "Input: ";
+         cout << "post - val: ";
          cin >> post >> val;
-         insert(head, post, val);
-         print(head);
+         linklist.insert(head, post, val);
+         linklist.print(head);
          cout << endl;
         }
         if(chon == 1) {
-         cout << "Input: " ;
-         cin >> post;
-        erase(head, post);
-        print(head);
-          cout << endl;
-        }
+        	cout << "post: "; cin >> post;
+        	linklist.erase(head, post);
+        	linklist.print(head);
+        	cout <<endl;
+		}
+		if(chon != 0 || chon != 1){
+			cout <<"\n" ;
+			cout << "Nhap sai hay chon lai ! \n\n";
+			menu(T);
+		}
+	
     }
-    
+}
+
+int main()
+{ 
+    int T;
+    cout <<"Input: " ;
+    cin >> T;
+    menu(T);
     return 0;
 }
