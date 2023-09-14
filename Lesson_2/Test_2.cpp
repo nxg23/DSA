@@ -13,13 +13,8 @@ class Node{
 
 class linkList{
 	public:
-		void print(Node *head);
-	    void insert(Node *&head, int post, int val);
-	    void erase(Node *&head, int post);
-
-};
-
-void linkList::print(Node *head)
+	
+void print(Node *head)
 {
 	cout << "Output: ";
     while(head != NULL){
@@ -29,7 +24,7 @@ void linkList::print(Node *head)
     cout << endl;
 }
 
-void linkList::insert(Node *&head, int post, int val)
+void insert(Node *&head, int post, int val)
 {
 	int n = sizeof(head);
 	Node *temp = head;
@@ -63,7 +58,7 @@ void linkList::insert(Node *&head, int post, int val)
 }
 
 
-void linkList::erase(Node *&head, int post)
+void erase(Node *&head, int post)
 {
     int n = sizeof(head);
     Node *temp = head;
@@ -95,6 +90,8 @@ void linkList::erase(Node *&head, int post)
       delete postNode;
     }
 }
+
+};
 void menu(int T)
 {
 	linkList linklist;
