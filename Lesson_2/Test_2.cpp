@@ -112,15 +112,16 @@ void menu(int T)
          linklist.print(head);
          cout << endl;
         }
-        if(chon == 1) {
+        else if(chon == 1) {
         	cout << "post: "; cin >> post;
         	linklist.erase(head, post);
         	linklist.print(head);
         	cout <<endl;
 		}
-		if(chon != 0 || chon != 1){
+		else {
+			cin.ignore();
 			cout <<"\n" ;
-			cout << "Nhap sai hay chon lai ! \n\n";
+			cout << "Nhap sai hay chon lai \n\n";
 			menu(T);
 		}
 	
